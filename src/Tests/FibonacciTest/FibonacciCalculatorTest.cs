@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using Fibonacci;
+using IntrepidProducts.Fibonacci;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FibonacciTest
+namespace IntrepidProducts.FibonacciTest
 {
     [TestClass]
     public class FibonacciCalculatorTest

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Numerics;
 
-namespace Fibonacci
+namespace IntrepidProducts.Fibonacci
 {
     //The numbers in this series are going to start with 0 and 1.
     //The next number is the sum of the previous two numbers.
