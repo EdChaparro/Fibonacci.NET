@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Numerics;
 
-namespace Fibonacci
+namespace IntrepidProducts.Fibonacci
 {
     //The numbers in this series are going to start with 0 and 1.
     //The next number is the sum of the previous two numbers.
@@ -12,56 +13,34 @@ namespace Fibonacci
     //      F(n-2) is the term before that (n-2).
     public static class FibonacciCalculator
     {
-        public static IEnumerable<int> CalculateFibonacciUpTo(int elementCount)
+        public static IEnumerable<int> CalculateFibonacci(int nbrOfElements)
         {
             var sequence = new List<int> { 0, 1 };
 
-            if (elementCount < 3)
+            while (sequence.Count < nbrOfElements)
             {
-                return sequence;
-            }
+                var penultimateNbr = sequence[^2];
+                var lastNbr = sequence[^1];
 
-            var firstNumber = 0;
-            var secondNumber = 1;
-
-            for (int i = 0; i < elementCount - 2; i++)
-            {
-                var nextElement = firstNumber + secondNumber;
-                sequence.Add(nextElement);
-
-                firstNumber = secondNumber;
-                secondNumber = nextElement;
+                sequence.Add(penultimateNbr + lastNbr);
             }
 
             return sequence;
         }
 
-        public static IEnumerable<int> CalculateFibonacciUpToAlt(int elementCount)
+        public static IEnumerable<BigInteger> FibonacciSequence(int nbrOfElements = 10)
         {
-            return CalculateFibonacciUpToAlt(elementCount, new List<int> {0, 1});
-        }
+            var previousNbr = 1;
+            var currentNbr = 0; //Bootstrap sequence with zero
 
-        public static IEnumerable<int> CalculateFibonacciUpToAlt
-            (int elementCount, List<int>? sequence = null)
-        {
-            var calcSequence = sequence ?? new List<int> { 0, 1 };
-
-            if (calcSequence.Count < 2)
+            for (int i = 0; i < nbrOfElements; i++)
             {
-                return calcSequence;
+                yield return currentNbr;
+
+                var nextNbr = previousNbr + currentNbr;
+                previousNbr = currentNbr;
+                currentNbr = nextNbr;
             }
-
-            if (calcSequence.Count >= elementCount)
-            {
-                return calcSequence;
-            }
-
-            var penultimateNbr = calcSequence[^2];
-            var lastNbr = calcSequence[^1];
-
-            calcSequence.Add(penultimateNbr + lastNbr);
-
-            return CalculateFibonacciUpToAlt(elementCount, calcSequence);
         }
     }
 }

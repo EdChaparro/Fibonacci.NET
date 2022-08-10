@@ -1,10 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Fibonacci;
+using IntrepidProducts.Fibonacci;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FibonacciTest
+namespace IntrepidProducts.FibonacciTest
 {
     [TestClass]
     public class FibonacciCalculatorTest
@@ -12,17 +11,23 @@ namespace FibonacciTest
         [TestMethod]
         public void ShouldCalculateSequenceForNumberOfElements()
         {
-            ExecuteFibonacciSequenceStrategy(FibonacciCalculator.CalculateFibonacciUpTo);
-            ExecuteFibonacciSequenceStrategy(FibonacciCalculator.CalculateFibonacciUpToAlt);
+            var expectedResults = new List<int> { 0, 1, 1, 2, 3, 5, 8, 13 };
+
+            var calculatedResults = FibonacciCalculator.CalculateFibonacci(expectedResults.Count);
+
+            CollectionAssert.AreEqual(expectedResults, calculatedResults.ToList());
         }
 
-        public void ExecuteFibonacciSequenceStrategy(Func<int, IEnumerable<int>> strategy)
+        [TestMethod]
+        public void ShouldIterateFibonacciSequence()
         {
             var expectedResults = new List<int> { 0, 1, 1, 2, 3, 5, 8, 13 };
 
-            var calculatedResults = strategy(expectedResults.Count);
-
-            CollectionAssert.AreEqual(expectedResults, calculatedResults.ToList());
+            var i = 0;
+            foreach (var nbr in FibonacciCalculator.FibonacciSequence(expectedResults.Count))
+            {
+                Assert.AreEqual(expectedResults[i++], nbr);
+            }
         }
     }
 }
