@@ -12,56 +12,19 @@ namespace Fibonacci
     //      F(n-2) is the term before that (n-2).
     public static class FibonacciCalculator
     {
-        public static IEnumerable<int> CalculateFibonacciUpTo(int elementCount)
+        public static IEnumerable<int> CalculateFibonacci(int nbrOfElements)
         {
             var sequence = new List<int> { 0, 1 };
 
-            if (elementCount < 3)
+            while (sequence.Count < nbrOfElements)
             {
-                return sequence;
-            }
+                var penultimateNbr = sequence[^2];
+                var lastNbr = sequence[^1];
 
-            var firstNumber = 0;
-            var secondNumber = 1;
-
-            for (int i = 0; i < elementCount - 2; i++)
-            {
-                var nextElement = firstNumber + secondNumber;
-                sequence.Add(nextElement);
-
-                firstNumber = secondNumber;
-                secondNumber = nextElement;
+                sequence.Add(penultimateNbr + lastNbr);
             }
 
             return sequence;
-        }
-
-        public static IEnumerable<int> CalculateFibonacciUpToAlt(int elementCount)
-        {
-            return CalculateFibonacciUpToAlt(elementCount, new List<int> {0, 1});
-        }
-
-        public static IEnumerable<int> CalculateFibonacciUpToAlt
-            (int elementCount, List<int>? sequence = null)
-        {
-            var calcSequence = sequence ?? new List<int> { 0, 1 };
-
-            if (calcSequence.Count < 2)
-            {
-                return calcSequence;
-            }
-
-            if (calcSequence.Count >= elementCount)
-            {
-                return calcSequence;
-            }
-
-            var penultimateNbr = calcSequence[^2];
-            var lastNbr = calcSequence[^1];
-
-            calcSequence.Add(penultimateNbr + lastNbr);
-
-            return CalculateFibonacciUpToAlt(elementCount, calcSequence);
         }
     }
 }

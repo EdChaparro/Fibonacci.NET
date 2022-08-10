@@ -12,8 +12,7 @@ namespace FibonacciTest
         [TestMethod]
         public void ShouldCalculateSequenceForNumberOfElements()
         {
-            ExecuteFibonacciSequenceStrategy(FibonacciCalculator.CalculateFibonacciUpTo);
-            ExecuteFibonacciSequenceStrategy(FibonacciCalculator.CalculateFibonacciUpToAlt);
+            ExecuteFibonacciSequenceStrategy(FibonacciCalculator.CalculateFibonacci);
         }
 
         public void ExecuteFibonacciSequenceStrategy(Func<int, IEnumerable<int>> strategy)
