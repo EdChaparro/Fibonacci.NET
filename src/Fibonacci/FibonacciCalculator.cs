@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Numerics;
 
 namespace Fibonacci
 {
@@ -25,6 +26,21 @@ namespace Fibonacci
             }
 
             return sequence;
+        }
+
+        public static IEnumerable<BigInteger> FibonacciSequence(int nbrOfElements = 10)
+        {
+            var previousNbr = 1;
+            var currentNbr = 0; //Bootstrap sequence with zero
+
+            for (int i = 0; i < nbrOfElements; i++)
+            {
+                yield return currentNbr;
+
+                var nextNbr = previousNbr + currentNbr;
+                previousNbr = currentNbr;
+                currentNbr = nextNbr;
+            }
         }
     }
 }
